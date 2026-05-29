@@ -72,12 +72,16 @@ void copiazaAnumiteElemente(struct Depozit* vector, char nrElemente, float prag,
 	//este creat un nou vector cu elementele care indeplinesc acea conditie
 }
 
-struct Depozit getPrimulElementConditionat(struct Depozit* vector, int nrElemente, const char* conditie) {
+struct Depozit getPrimulElementConditionat(struct Depozit* vector, int nrElemente, const char* numeCautat) {
 	//trebuie cautat elementul care indeplineste o conditie
 	//dupa atributul de tip char*. Acesta este returnat.
 	struct Depozit s;
 	s.id = 1;
-
+	for (int i = 0; i < nrElemente; i++) {
+		if (strcmp(numeCautat, vector[i].denumire) == 0) {
+			s = copiaza(vector[i]);
+		}
+	}
 	return s;
 }
 
@@ -99,5 +103,9 @@ int main() {
 	int nrCopiate = 2;
 	Depozit* scurt = copiazaPrimeleNElemente(vector, nrDepozite, nrCopiate);
 	afisareVector(scurt, nrCopiate);
+
+	Depozit depozitCautat = getPrimulElementConditionat(vector, nrDepozite, "Emag");
+
+	afisare(depozitCautat);
 	return 0;
 }
